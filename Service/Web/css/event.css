@@ -1,0 +1,71 @@
+.ffont{
+  font-family: 'Bebas Neue', cursive;
+  text-align: center;
+  color: black;
+  font-size:100px;
+}
+
+.job_list {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.job_list:hover{
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+
+a{
+  text-decoration:none ;
+  color:black;}
+
+a:hover { text-decoration:none !important }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 30%;
+  max-width: 30%;
+  padding: 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+.job_list{
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.item{
+    flex-basis: 300px;
+    margin-left: 200px;
+    padding-bottom: 40px
+
+}
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cart Pass</title>
+        <link rel="stylesheet" href="./css/mart.css">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+        <script>
+            dropBall = function() {
+              var canvas = document.querySelector('canvas#ball');
+              var ctx = canvas.getContext('2d');
+
+              var x = 325;
+              for (var i = 0; i < 600; i++) {
+                draw(x, i);
+              }
+
+              function draw(x, y) {
+                setTimeout(function() {
+                  ctx.clearRect(0, 0, 400, 600);
+                  ctx.beginPath();
+                  ctx.arc(x, y, 20, 0, Math.PI * 2, true);
+                  ctx.fillStyle = "red";
+                  ctx.fill();
+                }, 5 * y);
+              }
+            }
+
+
+
+            function getRandom(range) {
+              return Math.floor(range * Math.random());
+            }
+
+
+            start = function() {
+              dropBall();
+            }
+
+        </script>
+
+        <script type="text/javascript">
+        window.onload = function(){
+            var canvas = document.getElementById("canvas");
+            if(canvas.getContext){
+                var draw = canvas.getContext("2d");
+
+                var img = new Image();
+              img.src= 'https://mblogthumb-phinf.pstatic.net/20150711_208/spirit8910_1436622293077W2WYO_JPEG/%C8%B8%C3%B5%C7%CF%B3%AA%B7%CE.jpg?type=w2'
+                img.onload = function(){
+                    //이미지의 원하는 부분만 잘라서 그리기
+                    //drawImage(이미지객체,
+                    //        이미지의 왼위 부분x, 이미지의 왼위 부분y, 이미지의 원하는 가로크기, 이미지의 원하는 세로크기,
+                    //        사각형 부분x, 사각형 부분y, 가로크기, 세로크기)
+                    //draw.drawImage(img, 100,100, 300,300, 50,50, 250,300);
+
+                    //전체 이미지 그리기
+                    //drawImage(이미지객체, 사각형 왼위 x, 사각형 왼위 y, 가로크기, 세로크기)
+                    draw.drawImage(img, 76.5,100,600,280, 150,50,1000,600);
+                }
+            }
+        }
+        </script>
+
+
+
+
+    </head>
+    <body>
+        <h1 class="ffont"><a href="/">CART PASS<img src="https://img.icons8.com/material/75/000000/fast-cart.png"/></a></h1>
+
+
+        <input type="button" value="ENTRANCE" class="button" onclick="start();" />
+        <div class="canvas-wrap">
+            <canvas id="canvas" width="1100px" height="600px"></canvas>
+            <canvas id="ball" width="1000" height="600"></canvas>
+
+        </div>
+        <input type="button" value="EXIT" class="button2" onclick="start();" />
+
+
+    </body>
+</html>

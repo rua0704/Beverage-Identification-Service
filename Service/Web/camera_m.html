@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cart Pass</title>
+        <link rel="stylesheet" href="./css/camera.css">
+        <link rel="stylesheet" href="./css/table.css">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    </head>
+    <body>
+        <h1 class="ffont"><a href="/">CART PASS<img src="https://img.icons8.com/material/75/000000/fast-cart.png"/></a></h1>
+        
+        <button id="snap">Load List</button>
+
+            <div id = "itemContainer" style="width: 100%">
+                <table id='table'>
+                    <th>제품명</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                </table>
+                <h3 id='sum' style="text-align: left; margin-left: 12%; text">합계 : 0</h3>
+            </div>
+                <script>
+                    
+
+                    const itemContainer = document.getElementById('itemContainer')
+
+                    document.getElementById("snap").addEventListener("click", function() {
+                        $.ajax({
+                            type: "POST",
+                            url: "http://ccbe-35-189-186-205.ngrok.io/list",
+                            data: {"id":"test"},
+                            dataType:'JSON'
+                        })
+                        .done(function (data) {
+                            var temp = data.result.split(".");
+                            const table = document.getElementById('table');
+                            table.innerHTML = "<th>제품명</th><th>가격</th><th>수량</th>";
+
+                            var itemList = new Array();
+                            var priceList = new Array();
+                            var count = 0;
+                            var sum = 0;
+
+                            for (var i = 0; i < temp.length - 1; i++){
+                                itemName = temp[i].split(",")[0];
+                                itemPrice = temp[i].split(",")[1];
+
+                                sum+=Number(itemPrice)
+
+                                if(itemList.includes(itemName)){
+                                    
+                                    var index = itemList.indexOf(itemName);
+                                    var cells = table.getElementsByTagName('td');
+                                    cells[index * 3 - 1].innerText = Number(cells[index * 3 - 1].innerText) + Number(1);
+                                }
+                                else{
+                                    count += 1;
+
+                                    itemList[count] = itemName;
+                                    priceList[count] = itemPrice;
+
+                                    const newRow = table.insertRow();
+                                    const newCell1 = newRow.insertCell(0);
+                                    const newCell2 = newRow.insertCell(1);
+                                    const newCell3 = newRow.insertCell(2);
+                                  
+                                    newCell1.innerText = itemList[count];
+                                    newCell2.innerText = priceList[count];
+                                    newCell3.innerText = 1;
+                                }
+                                document.getElementById('sum').innerText = '합계 : ' + sum + '(원)'
+                            }
+                        });
+                    });
+                </script>
+    </body>
+</html>
